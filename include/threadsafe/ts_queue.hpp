@@ -1,4 +1,4 @@
-#ifndef TS_QUEUE_H__
+﻿#ifndef TS_QUEUE_H__
 #define TS_QUEUE_H__
 
 /*!
@@ -7,13 +7,12 @@
  * @author	梦丿无情
  * @date	2018-8-29
  *
- * @brief
+ * @brief   基于链表和互斥锁的线程安全队列
  */
 
 #include "ts_node.hpp"
 
 #include <mutex>
-#include <condition_variable>
 
 NAME_DS_START
 
@@ -27,6 +26,10 @@ public:
     }
     ts_queue(const ts_queue&) = delete;
     ts_queue& operator=(const ts_queue&) = delete;
+    ~ts_queue()
+    {
+        delete head_;
+    }
 
     // 入队
     void push(std::shared_ptr<_Ty> pData)
@@ -51,6 +54,7 @@ public:
             head_ = old_head->next_;
         }
         auto pData = std::move(old_head->data_);
+        old_head->next_ = nullptr;
         delete old_head;
         return pData;
     }
@@ -58,7 +62,8 @@ public:
     // 判断空
     bool empty()
     {
-        return head_ == tail_;
+        std::lock_guard<std::mutex> lk(mu_head_);
+        return head_ == _get_tail();
     }
 
 protected:

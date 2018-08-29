@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.4)
+﻿cmake_minimum_required(VERSION 3.4)
 
-project(libdstl)
+project(libds-task)
 
 include(${PROJECT_SOURCE_DIR}/script/custom_binary.cmake)
 if(WIN32)

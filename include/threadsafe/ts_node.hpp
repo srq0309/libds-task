@@ -1,4 +1,4 @@
-#ifndef TS_NODE_H__
+﻿#ifndef TS_NODE_H__
 #define TS_NODE_H__
 
 /*!
@@ -22,17 +22,14 @@ struct ts_node
     std::shared_ptr<_Ty> data_;
     ts_node *next_;
 
-    ts_node()
-        :data_(nullptr), next_(nullptr)
-    {
-    }
-    ts_node(const std::shared_ptr<_Ty>& data, ts_node *next)
+    ts_node(const std::shared_ptr<_Ty>& data = nullptr, ts_node *next = nullptr)
         :data_(data), next_(next)
     {
     }
-    ts_node(std::shared_ptr<_Ty>&& data, ts_node *next)
-        :data_(data), next_(next)
+    ~ts_node()
     {
+        data_.reset();
+        delete next_;
     }
 };
 
