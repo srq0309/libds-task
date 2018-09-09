@@ -11,5 +11,8 @@ include_directories(${PROJECT_SOURCE_DIR}/include)
 
 # 本项目仅需要包含头文件，以下是测试程序
 
+# 工具杂项
+add_subdirectory(${PROJECT_SOURCE_DIR}/src/utils)
+
 # 线程安全数据结构
 add_subdirectory(${PROJECT_SOURCE_DIR}/src/threadsafe)
