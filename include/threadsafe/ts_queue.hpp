@@ -20,18 +20,36 @@ template<typename _Ty>
 class ts_queue
 {
 public:
+    /*！
+     * @brief	初始化
+     */
     ts_queue()
         :head_(new ts_node<_Ty>), tail_(head_)
     {
     }
+
+    /*！
+     * @brief	禁止拷贝构造
+     */
     ts_queue(const ts_queue&) = delete;
+
+    /*！
+     * @brief	禁止赋值运算
+     */
     ts_queue& operator=(const ts_queue&) = delete;
+
+    /*！
+     * @brief	析构整个链表
+     */
     ~ts_queue()
     {
         delete head_;
     }
 
-    // 入队
+    /*！
+     * @brief	入队
+     * @param	智能指针包裹的数据
+     */
     void push(std::shared_ptr<_Ty> pData)
     {
         auto new_tail = new ts_node<_Ty>;
@@ -41,7 +59,10 @@ public:
         tail_ = new_tail;
     }
 
-    // 非等待出队，失败返回空指针
+    /*！
+     * @brief	非等待出队
+     * @return	成功返回智能指针包裹的数据，失败返回空指针
+     */
     std::shared_ptr<_Ty> pop()
     {
         ts_node<_Ty> *old_head = nullptr;   // 待出队的旧节点
@@ -59,7 +80,10 @@ public:
         return pData;
     }
 
-    // 判断空
+    /*！
+     * @brief	判断空
+     * @return	队列为空返回true，否则返回false
+     */
     bool empty()
     {
         std::lock_guard<std::mutex> lk(mu_head_);

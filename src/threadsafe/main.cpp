@@ -29,10 +29,10 @@ void test2()
     s.push(std::make_shared<int>(2));
     s.push(std::make_shared<int>(3));
 
-    for (int i = 0; i != 4; ++i) {
-        auto pData = s.pop();
-        if (pData)
-            cout << *pData << endl;
+    for (auto i = 0; i != 4; ++i) {
+        auto p_data = s.pop();
+        if (p_data)
+            cout << *p_data << endl;
     }
     cout << "test2() end.\n" << endl;
 }

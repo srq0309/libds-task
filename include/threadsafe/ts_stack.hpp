@@ -20,28 +20,49 @@ template<typename _Ty>
 class ts_stack
 {
 public:
+    /*！
+     * @brief	初始化
+     */
     ts_stack()
         :head_(nullptr)
     {
     }
+
+    /*！
+     * @brief	禁止拷贝构造
+     */
     ts_stack(const ts_stack&) = delete;
+
+    /*！
+     * @brief	禁止赋值运算
+     */
     ts_stack& operator=(const ts_stack&) = delete;
+
+    /*！
+     * @brief	析构整个链表
+     */
     ~ts_stack()
     {
         delete head_;
     }
 
-    // 入栈
+    /*！
+     * @brief	入栈
+     * @param	智能指针包裹的数据
+     */
     void push(std::shared_ptr<_Ty> pData)
     {
         auto new_head = new ts_node<_Ty>(pData);
-        
+
         std::lock_guard<std::mutex> lk(mu_head_);
         new_head->next_ = head_;
         head_ = new_head;
     }
 
-    // 非等待出栈，失败返回空指针
+    /*！
+     * @brief	非等待出栈
+     * @return	成功返回智能指针包裹的数据，失败返回空指针
+     */
     std::shared_ptr<_Ty> pop()
     {
         ts_node<_Ty> *old_head = nullptr;
@@ -59,6 +80,10 @@ public:
         return pData;
     }
 
+    /*！
+     * @brief	判断空
+     * @return	队列为空返回true，否则返回false
+     */
     bool empty()
     {
         std::lock_guard<std::mutex> lk(mu_head_);
