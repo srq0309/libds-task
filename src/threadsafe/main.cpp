@@ -8,7 +8,7 @@ using namespace std;
 // ts_queue基本功能测试
 void test1()
 {
-    ds::ts_queue<int> q;
+    ts_queue<int> q;
     q.push(std::make_shared<int>(1));
     q.push(std::make_shared<int>(2));
     q.push(std::make_shared<int>(3));
@@ -24,7 +24,7 @@ void test1()
 // ts_stack基本功能测试
 void test2()
 {
-    ds::ts_stack<int> s;
+    ts_stack<int> s;
     s.push(std::make_shared<int>(1));
     s.push(std::make_shared<int>(2));
     s.push(std::make_shared<int>(3));

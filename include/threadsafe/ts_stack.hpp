@@ -14,8 +14,6 @@
 
 #include <mutex>
 
-NAME_DS_START
-
 template<typename _Ty>
 class ts_stack
 {
@@ -94,7 +92,5 @@ private:
     ts_node<_Ty> *head_;
     std::mutex mu_head_;
 };
-
-NAME_DS_END
 
 #endif // TS_STACK_H__

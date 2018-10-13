@@ -12,10 +12,6 @@
 
 #include <memory>
 
-#include "../base/ds.h"
-
-NAME_DS_START
-
 template<typename _Ty>
 struct ts_node
 {
@@ -32,7 +28,5 @@ struct ts_node
         delete next_;
     }
 };
-
-NAME_DS_END
 
 #endif // TS_NODE_H__

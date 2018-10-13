@@ -14,8 +14,6 @@
 
 #include <mutex>
 
-NAME_DS_START
-
 template<typename _Ty>
 class ts_queue
 {
@@ -104,7 +102,5 @@ private:
     ts_node<_Ty> *tail_;
     std::mutex mu_tail_;
 };
-
-NAME_DS_END // namespace ds
 
 #endif // TS_QUEUE_H__
